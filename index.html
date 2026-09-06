@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questa settimana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF1F0; --surface:#FFFFFF; --ink:#16232B; --muted:#5E6B73;
+    --line:#D6DCDA; --accent:#1D6F72; --accent-soft:#DDEDEC; --warn:#A3541D; --warn-soft:#F6E7DC; --ok:#2E7D4F;
+  }
+  *{box-sizing:border-box}
+  html{font-size:17px}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.45}
+  main{max-width:640px;margin:0 auto;padding:20px 18px 80px}
+  button{font:inherit;cursor:pointer}
+  a{color:var(--accent)}
+  h1,h2,h3{margin:0;font-weight:600;line-height:1.2}
+  .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .top .nav{display:flex;gap:4px}
+  .nav button, .ghost{background:none;border:1px solid var(--line);border-radius:6px;padding:4px 10px;color:var(--ink)}
+  .week-label{color:var(--muted);font-size:.9rem}
+  .hero{margin:14px 0 22px}
+  .hero .phase{color:var(--muted);font-size:.95rem}
+  .hero h1{font-size:1.55rem;margin-top:2px}
+  .time{display:flex;align-items:baseline;gap:8px;margin-top:14px}
+  .time .n{font-size:3.4rem;font-weight:500;letter-spacing:-.03em;color:var(--accent);line-height:1}
+  .time .u{color:var(--muted)}
+  .time .cap{margin-left:auto;font-size:.85rem;color:var(--muted);text-align:right;max-width:50%}
+  .note{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 6px 6px 0;font-size:.93rem;margin:14px 0}
+  section{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px}
+  section h2{font-size:1.05rem;margin-bottom:10px}
+  .task{display:grid;grid-template-columns:24px 1fr auto;gap:10px;padding:9px 0;border-top:1px solid var(--line);align-items:start}
+  .task:first-of-type{border-top:0}
+  .task input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--accent)}
+  .task .m{color:var(--muted);font-size:.85rem;white-space:nowrap;padding-top:2px}
+  .task label{cursor:pointer}
+  .task.done label{color:var(--muted);text-decoration:line-through}
+  .micro li{margin:4px 0;color:var(--muted)}
+  .stop{background:var(--warn-soft);border-left:3px solid var(--warn)}
+  .stop h2{color:var(--warn)}
+  .stop .alt{color:var(--muted);font-size:.93rem;margin-top:6px}
+  .ev{padding:8px 0;border-top:1px solid var(--line);display:flex;gap:10px;align-items:start;font-size:.93rem}
+  .ev:first-child{border-top:0}
+  .ev .dot{width:10px;height:10px;border-radius:50%;background:var(--line);margin-top:7px;flex:none}
+  .ev .dot.ok{background:var(--ok)} .ev .dot.no{background:var(--warn)}
+  .ev small{display:block;color:var(--muted)}
+  label.f{display:block;font-size:.9rem;color:var(--muted);margin:10px 0 4px}
+  input[type=text],input[type=number],input[type=password],textarea{width:100%;font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
+  textarea{min-height:72px;resize:vertical}
+  .primary{background:var(--accent);color:#fff;border:0;border-radius:8px;padding:12px 16px;width:100%;font-weight:500;margin-top:14px}
+  .primary:disabled{opacity:.5}
+  .drift{font-size:.93rem;color:var(--muted)}
+  .drift b{color:var(--ink)}
+  .banner{background:var(--warn-soft);border:1px solid #E5C9B3;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:.93rem}
+  .banner button{margin-top:8px}
+  .msg{font-size:.9rem;margin-top:8px;color:var(--muted)}
+  .msg.err{color:var(--warn)}
+  details.settings{margin-top:26px;color:var(--muted);font-size:.9rem}
+  details.settings summary{cursor:pointer}
+  .closed{opacity:.75}
+  @media (prefers-reduced-motion:no-preference){ .task input{transition:transform .1s} }
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <div class="week-label" id="weekLabel">…</div>
+    <div class="nav">
+      <button id="prev" aria-label="Settimana precedente">‹</button>
+      <button id="today">oggi</button>
+      <button id="next" aria-label="Settimana successiva">›</button>
+    </div>
+  </div>
+
+  <div id="banner"></div>
+  <div id="view">Carico il piano…</div>
+
+  <details class="settings" id="settings">
+    <summary>Impostazioni</summary>
+    <label class="f">Token GitHub (fine-grained, permesso Contents read/write su questo repo e read sui repo osservati)</label>
+    <input type="password" id="token" autocomplete="off">
+    <label class="f">Repo di questa app (owner/nome)</label>
+    <input type="text" id="appRepo" placeholder="tuo-utente/piano-app">
+    <label class="f">Repo osservato: brain (owner/nome)</label>
+    <input type="text" id="repoBrain" placeholder="tuo-utente/brain">
+    <label class="f">Repo osservato: pipeline (owner/nome; può essere lo stesso di brain)</label>
+    <input type="text" id="repoPipeline" placeholder="tuo-utente/brain">
+    <label class="f">Spostamento del calendario (settimane; positivo = tutto slitta avanti)</label>
+    <input type="number" id="offset" value="0">
+    <button class="ghost" id="saveSettings" style="margin-top:10px">Salva impostazioni</button>
+    <div class="msg" id="settingsMsg"></div>
+  </details>
+</main>
+
+<script>
+(async function(){
+  const $ = s => document.querySelector(s);
+  const LS = k => localStorage.getItem(k) || "";
+  const cfg = () => ({ token: LS("gh_token"), appRepo: LS("app_repo"), brain: LS("repo_brain"), pipeline: LS("repo_pipeline") });
+
+  // ---------- dati ----------
+  const bust = "?t=" + Date.now();
+  const piano = await (await fetch("piano.json" + bust)).json();
+  let stato = { offset: 0, chiusure: {}, spunte: {} };
+  try { stato = Object.assign(stato, await (await fetch("stato.json" + bust)).json()); } catch(e){}
+  if (LS("offset_local") !== "") stato.offset = Number(LS("offset_local")); // override locale finché non salvi su GitHub
+
+  const start = new Date(piano.inizio + "T00:00:00");
+  const msWeek = 7*24*3600*1000;
+  const weekOfDate = d => Math.floor((d - start)/msWeek) + 1 - (stato.offset||0);
+  let current = Math.min(52, Math.max(1, weekOfDate(new Date())));
+  let shown = current;
+
+  const fmt = iso => { const d = new Date(iso+"T00:00:00"); return d.toLocaleDateString("it-IT",{day:"numeric",month:"short"}); };
+  const shift = iso => { const d = new Date(iso+"T00:00:00"); d.setDate(d.getDate() + 7*(stato.offset||0)); return d.toISOString().slice(0,10); };
+  const ore = m => m >= 60 ? (m/60).toLocaleString("it-IT",{maximumFractionDigits:1}) + " h" : m + " min";
+
+  // ---------- GitHub ----------
+  const gh = async (path, opt={}) => {
+    const c = cfg();
+    const r = await fetch("https://api.github.com" + path, Object.assign({headers:{Authorization:"Bearer "+c.token, Accept:"application/vnd.github+json"}}, opt));
+    if (!r.ok) throw new Error(r.status + " " + (await r.text()).slice(0,120));
+    return r.json();
+  };
+  const putFile = async (repo, path, content, message) => {
+    let sha;
+    try { sha = (await gh(`/repos/${repo}/contents/${path}`)).sha; } catch(e){}
+    const body = { message, content: btoa(unescape(encodeURIComponent(content))) };
+    if (sha) body.sha = sha;
+    return gh(`/repos/${repo}/contents/${path}`, {method:"PUT", body: JSON.stringify(body)});
+  };
+  const getText = async (repo, path) => {
+    try { const j = await gh(`/repos/${repo}/contents/${path}`); return decodeURIComponent(escape(atob(j.content.replace(/\n/g,"")))); } catch(e){ return ""; }
+  };
+
+  // ---------- evidenze ----------
+  async function evidenza(spec, w){
+    const c = cfg();
+    if (!spec.startsWith("auto:")) return {txt: spec.replace(/^manuale:\s*/,""), sub:"da confermare a mano", cls:""};
+    const [,tipo,arg] = spec.split(":");
+    if (!c.token) return {txt: spec, sub:"serve il token nelle impostazioni", cls:""};
+    try{
+      if (tipo === "commits"){
+        const repo = arg === "brain" ? c.brain : c.pipeline;
+        if (!repo) return {txt:`commit in ${arg}`, sub:"repo non configurato", cls:""};
+        const since = shift(w.inizio)+"T00:00:00Z", until = shift(w.fine)+"T23:59:59Z";
+        const list = await gh(`/repos/${repo}/commits?since=${since}&until=${until}&per_page=50`);
+        return {txt:`${list.length} commit in ${repo}`, sub: list[0] ? "ultimo: " + list[0].commit.message.split("\n")[0] : "nessun commit questa settimana", cls: list.length ? "ok":"no"};
+      }
+      if (tipo === "files"){
+        const [root, ...rest] = arg.split("/"); const repo = root === "brain" ? c.brain : c.pipeline; const p = rest.join("/");
+        if (!repo) return {txt:`file in ${arg}`, sub:"repo non configurato", cls:""};
+        const list = await gh(`/repos/${repo}/contents/${p}`);
+        const n = Array.isArray(list) ? list.filter(x=>x.type==="file").length : 0;
+        return {txt:`${n} file in ${arg}`, sub:"", cls: n ? "ok":"no"};
+      }
+    }catch(e){ return {txt: spec, sub: "errore: " + e.message, cls:"no"}; }
+    return {txt: spec, sub:"", cls:""};
+  }
+
+  // ---------- deriva ----------
+  function deriva(){
+    const past = piano.settimane.filter(w => w.settimana < current);
+    const plan = past.reduce((a,w)=>a+w.minuti,0);
+    const done = past.reduce((a,w)=>a+((stato.chiusure[w.settimana]||{}).minuti||0),0);
+    const nonChiuse = past.filter(w=>!stato.chiusure[w.settimana]).length;
+    return {plan, done, nonChiuse};
+  }
+
+  // ---------- render ----------
+  async function render(){
+    const w = piano.settimane.find(x=>x.settimana===shown);
+    const chiusa = stato.chiusure[w.settimana];
+    $("#weekLabel").textContent = `Settimana ${w.settimana} di 52 · ${fmt(shift(w.inizio))} – ${fmt(shift(w.fine))}` + (w.settimana===current ? "" : (w.settimana<current?" · passata":" · futura"));
+
+    const d = deriva(); let banner = "";
+    if (current > 1){
+      const late = Math.max(0, Math.round((d.plan - d.done)/piano.capienza_minuti_settimana.ordinario));
+      banner += `<div class="drift">Finora: <b>${ore(d.done)}</b> fatte su <b>${ore(d.plan)}</b> pianificate` + (d.nonChiuse ? ` · <b>${d.nonChiuse}</b> settimane senza chiusura` : "") + `.</div>`;
+      if (late >= 3 || d.nonChiuse >= 3) banner = `<div class="banner">Sei indietro di circa <b>${late}</b> settimane${d.nonChiuse>=3?" e non chiudi da "+d.nonChiuse:""}. Il piano si allunga, non si recupera: sposta tutto avanti.<br><button class="ghost" id="shiftBtn">Sposta il calendario di ${Math.max(late,1)} settimane</button>${banner}</div>`;
+    }
+    $("#banner").innerHTML = banner;
+    const sb = $("#shiftBtn"); if (sb) sb.onclick = () => applyShift(Math.max(Math.round((d.plan-d.done)/piano.capienza_minuti_settimana.ordinario),1));
+
+    const spunte = stato.spunte[w.settimana] || [];
+    const tasks = w.attivita.map((t,i)=>`<div class="task ${spunte.includes(i)?"done":""}"><input type="checkbox" id="t${i}" data-i="${i}" ${spunte.includes(i)?"checked":""}><label for="t${i}">${md(t.testo)}</label><span class="m">${t.minuti} min</span></div>`).join("");
+    const micro = w.micro.length ? `<section><h2>Micro-momenti (5-10 min, sparsi)</h2><ul class="micro">${w.micro.map(m=>`<li>${md(m)}</li>`).join("")}</ul></section>` : "";
+    const stop = w.stop ? `<section class="stop"><h2>Criterio di stop questa settimana</h2><div>${w.stop.testo}</div><div class="alt">Se no: ${w.stop.altrimenti}</div></section>` : "";
+    const nextStop = piano.settimane.find(x=>x.settimana>w.settimana && x.stop);
+    const cap = w.settimana<=4 ? "regime sprint: 6-8 h a settimana" : `regime ordinario: max ${ore(piano.capienza_minuti_settimana.ordinario)} a settimana`;
+
+    $("#view").innerHTML = `
+      <div class="hero ${chiusa?"closed":""}">
+        <div class="phase">${w.fase}</div>
+        <h1>${w.titolo}</h1>
+        <div class="time"><span class="n">${ore(w.minuti)}</span><span class="u">da bloccare in agenda</span><span class="cap">${cap}${nextStop && !w.stop ? `<br>prossimo criterio di stop: S${nextStop.settimana}`:""}</span></div>
+        ${w.note?`<div class="note">${w.note}</div>`:""}
+      </div>
+      <section><h2>Da fare</h2>${tasks}</section>
+      ${micro}
+      ${stop}
+      <section><h2>Evidenze</h2><div id="ev">${w.evidenze.map(()=>`<div class="ev"><span class="dot"></span><div>…</div></div>`).join("")}</div></section>
+      <section id="checkin">
+        <h2>${chiusa ? "Settimana chiusa" : "Chiudi la settimana"}</h2>
+        ${chiusa ? `<div class="drift">${ore(chiusa.minuti)} effettive · attrito: ${chiusa.attrito||"—"} · prossimo: ${chiusa.prossimo||"—"}</div>` : `
+        <label class="f">Ore effettive (minuti)</label><input type="number" id="minEff" placeholder="es. 75">
+        <label class="f">Attrito — cosa ti ha bloccato davvero</label><textarea id="attrito"></textarea>
+        <label class="f">Prossimo blocco — la prima cosa da fare la settimana prossima</label><input type="text" id="prossimo">
+        <button class="primary" id="chiudi">Chiudi la settimana e scrivi il log</button>
+        <div class="msg" id="chiudiMsg"></div>`}
+      </section>`;
+
+    document.querySelectorAll(".task input").forEach(cb => cb.onchange = e => {
+      const i = Number(e.target.dataset.i); const s = new Set(stato.spunte[w.settimana]||[]);
+      e.target.checked ? s.add(i) : s.delete(i); stato.spunte[w.settimana] = [...s];
+      e.target.closest(".task").classList.toggle("done", e.target.checked);
+      localStorage.setItem("spunte_draft", JSON.stringify(stato.spunte));
+    });
+    const btn = $("#chiudi"); if (btn) btn.onclick = () => chiudi(w);
+
+    const evs = await Promise.all(w.evidenze.map(s => evidenza(s, w)));
+    $("#ev").innerHTML = evs.map(e=>`<div class="ev"><span class="dot ${e.cls}"></span><div>${e.txt}${e.sub?`<small>${e.sub}</small>`:""}</div></div>`).join("");
+  }
+
+  function md(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/`([^`]+)`/g,"<code>$1</code>"); }
+
+  async function chiudi(w){
+    const c = cfg(); const m = $("#chiudiMsg");
+    if (!c.token || !c.appRepo){ m.className="msg err"; m.textContent="Prima inserisci token e repo dell'app nelle impostazioni."; return; }
+    const minuti = Number($("#minEff").value||0), attrito = $("#attrito").value.trim(), prossimo = $("#prossimo").value.trim();
+    const spunte = stato.spunte[w.settimana]||[];
+    const fatte = w.attivita.filter((_,i)=>spunte.includes(i)).map(t=>t.testo.split(":")[0].split(".")[0]);
+    const nonFatte = w.attivita.filter((_,i)=>!spunte.includes(i)).map(t=>t.testo.split(":")[0].split(".")[0]);
+    const oggi = new Date().toLocaleDateString("it-IT");
+    const blocco = `\n## Settimana ${w.settimana} — ${oggi}\n- Fatto: ${fatte.join("; ")||"—"}\n- Non fatto: ${nonFatte.join("; ")||"—"}\n- Ore effettive: ${ore(minuti)}\n- Attrito: ${attrito||"—"}\n- Prossimo blocco: ${prossimo||"—"}\n`;
+    $("#chiudi").disabled = true; m.className="msg"; m.textContent="Scrivo su GitHub…";
+    try{
+      const log = await getText(c.appRepo, "log.md");
+      await putFile(c.appRepo, "log.md", (log||"# Log settimanale\n") + blocco, `Chiusura settimana ${w.settimana}`);
+      stato.chiusure[w.settimana] = {minuti, attrito, prossimo, data: new Date().toISOString().slice(0,10)};
+      await putFile(c.appRepo, "stato.json", JSON.stringify(stato,null,2), `Stato dopo settimana ${w.settimana}`);
+      m.textContent = "Log scritto. La prossima settimana ti aspetta."; localStorage.removeItem("spunte_draft");
+      setTimeout(render, 800);
+    }catch(e){ m.className="msg err"; m.textContent="Non ho potuto scrivere: " + e.message; $("#chiudi").disabled=false; }
+  }
+
+  async function applyShift(n){
+    stato.offset = (stato.offset||0) + n; localStorage.setItem("offset_local", stato.offset);
+    const c = cfg();
+    if (c.token && c.appRepo){ try{ await putFile(c.appRepo, "stato.json", JSON.stringify(stato,null,2), `Calendario spostato di ${n} settimane`); localStorage.removeItem("offset_local"); }catch(e){} }
+    current = Math.min(52, Math.max(1, weekOfDate(new Date()))); shown = current; render();
+  }
+
+  // ---------- impostazioni & nav ----------
+  $("#token").value = LS("gh_token"); $("#appRepo").value = LS("app_repo"); $("#repoBrain").value = LS("repo_brain"); $("#repoPipeline").value = LS("repo_pipeline"); $("#offset").value = stato.offset||0;
+  $("#saveSettings").onclick = () => {
+    localStorage.setItem("gh_token", $("#token").value.trim()); localStorage.setItem("app_repo", $("#appRepo").value.trim());
+    localStorage.setItem("repo_brain", $("#repoBrain").value.trim()); localStorage.setItem("repo_pipeline", $("#repoPipeline").value.trim() || $("#repoBrain").value.trim());
+    const off = Number($("#offset").value||0); if (off !== (stato.offset||0)) applyShift(off - (stato.offset||0));
+    $("#settingsMsg").textContent = "Salvate su questo dispositivo."; render();
+  };
+  $("#prev").onclick = () => { shown = Math.max(1, shown-1); render(); };
+  $("#next").onclick = () => { shown = Math.min(52, shown+1); render(); };
+  $("#today").onclick = () => { shown = current; render(); };
+  try { const d = JSON.parse(LS("spunte_draft")||"{}"); Object.assign(stato.spunte, d); } catch(e){}
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1557 @@
+{
+  "titolo": "Piano progetti personali — 12 mesi (v2)",
+  "inizio": "2026-09-07",
+  "versione": "2.0",
+  "capienza_minuti_settimana": {
+    "sprint": 390,
+    "ordinario": 105
+  },
+  "fasi": [
+    {
+      "nome": "Sprint",
+      "settimane": [
+        1,
+        4
+      ]
+    },
+    {
+      "nome": "Fase 1 — Media server",
+      "settimane": [
+        5,
+        12
+      ]
+    },
+    {
+      "nome": "F1 — Corso agentic AI",
+      "settimane": [
+        13,
+        20
+      ]
+    },
+    {
+      "nome": "Fase 2-bis — Pipeline 2 e 3",
+      "settimane": [
+        21,
+        32
+      ]
+    },
+    {
+      "nome": "Fase 3 — Modelli locali e routing",
+      "settimane": [
+        33,
+        40
+      ]
+    },
+    {
+      "nome": "Fase 3-bis / Fase 4",
+      "settimane": [
+        41,
+        52
+      ]
+    }
+  ],
+  "settimane": [
+    {
+      "settimana": 1,
+      "inizio": "2026-09-07",
+      "fine": "2026-09-13",
+      "fase": "Sprint",
+      "titolo": "Fondamenta del second brain e triage",
+      "minuti": 390,
+      "attivita": [
+        {
+          "testo": "Creare `brain/` su cartella sincronizzata; sottocartelle: inbox, fonti, ambiti, progetti, metodo, pipeline, piano. Nessun'altra",
+          "minuti": 20
+        },
+        {
+          "testo": "Scrivere `brain/CLAUDE.md`: struttura, convenzioni (un file per cosa, 3 righe di intestazione), cosa l'agente non deve toccare",
+          "minuti": 40
+        },
+        {
+          "testo": "Cattura su Mac: scorciatoia che salva testo o link in `inbox/`. Test con 3 cose reali: se servono più di 3 tocchi, semplificare",
+          "minuti": 40
+        },
+        {
+          "testo": "Cattura su Android: condivisione verso la stessa cartella. Stesso test",
+          "minuti": 30
+        },
+        {
+          "testo": "Versare in `fonti/` due corsi passati completi: struttura, materiali, cosa ha funzionato",
+          "minuti": 50
+        },
+        {
+          "testo": "Con Claude Code: comando `/triage` che legge `inbox/`, propone ambito e destinazione per ogni file, sposta solo dopo conferma",
+          "minuti": 120
+        },
+        {
+          "testo": "Con Claude Code: comando `/riepilogo` che dice cosa è entrato, dove è finito, cosa resta in inbox",
+          "minuti": 60
+        },
+        {
+          "testo": "Provare triage e riepilogo su tutto ciò che hai catturato in settimana; primo commit",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Catturare tutto quello che incontri, grezzo, senza organizzare"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:files:brain/inbox",
+        "manuale: screenshot del test di cattura da Android"
+      ],
+      "stop": null,
+      "note": "Due sessioni da 3 h (o una da 5-6 nel weekend + una da 60 min). Sessioni sotto le 2 h non contano come sviluppo."
+    },
+    {
+      "settimana": 2,
+      "inizio": "2026-09-14",
+      "fine": "2026-09-20",
+      "fase": "Sprint",
+      "titolo": "Codificare il metodo",
+      "minuti": 390,
+      "attivita": [
+        {
+          "testo": "Con Claude Code come intervistatore: un documento in `metodo/` per ogni passaggio della catena (analisi fabbisogni → obiettivi → struttura → contenuti → esercizi/valutazione → materiali docente → pacchetto e-learning)",
+          "minuti": 180
+        },
+        {
+          "testo": "Per ogni passaggio: cosa entra, cosa esce, criteri di qualità, tono, vincoli (framework competenze, accreditamenti, fondi interprofessionali)",
+          "minuti": 90
+        },
+        {
+          "testo": "Scegliere IL passaggio da automatizzare per primo: quello che ti ruba più tempo. Scriverne le specifiche in `pipeline/spec-01.md`: input reale, output atteso, come si giudica",
+          "minuti": 60
+        },
+        {
+          "testo": "Misura di partenza: quante ore ti costa oggi quel passaggio su un corso tipo. Scriverlo in `piano/decisioni.md`",
+          "minuti": 30
+        },
+        {
+          "testo": "Commit e chiusura settimana nell'app",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Cattura in routine",
+        "Triage con `/triage` a fine settimana"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:files:brain/metodo",
+        "manuale: numero di ore di partenza scritto in decisioni.md"
+      ],
+      "stop": {
+        "testo": "Hai fatto almeno 10 ore di sprint in S1+S2?",
+        "altrimenti": "Lo sprint diventa di 6 settimane. Nell'app: Impostazioni → sposta tutto di 2 settimane."
+      },
+      "note": null
+    },
+    {
+      "settimana": 3,
+      "inizio": "2026-09-21",
+      "fine": "2026-09-27",
+      "fase": "Sprint",
+      "titolo": "Costruire la prima pipeline",
+      "minuti": 390,
+      "attivita": [
+        {
+          "testo": "Con Claude Code, in `pipeline/`: il passaggio scelto come comando riusabile che legge `metodo/` e i materiali del corso e produce l'output nel formato che usi davvero",
+          "minuti": 180
+        },
+        {
+          "testo": "Test sui due corsi passati in `fonti/`: confrontare ciò che avevi prodotto a mano con l'output della pipeline",
+          "minuti": 90
+        },
+        {
+          "testo": "Ogni volta che l'output è sbagliato per una ragione che il metodo non diceva: correggere `metodo/`, non il prompt",
+          "minuti": 90
+        },
+        {
+          "testo": "Commit e chiusura settimana",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Cattura in routine",
+        "Triage a fine settimana"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:commits:pipeline",
+        "manuale: due output della pipeline salvati in progetti/"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 4,
+      "inizio": "2026-09-28",
+      "fine": "2026-10-04",
+      "fase": "Sprint",
+      "titolo": "Misura, chiusura, documentazione",
+      "minuti": 330,
+      "attivita": [
+        {
+          "testo": "Usare la pipeline su un corso in lavorazione, se c'è; altrimenti sul terzo corso passato",
+          "minuti": 120
+        },
+        {
+          "testo": "Misurare: ore prima, ore dopo, qualità dell'output (correzioni minori / sostanziali), costo in token per corso",
+          "minuti": 45
+        },
+        {
+          "testo": "Documentare in `metodo/caso-studio-01.md` cosa è stato costruito e come. È il primo materiale vendibile",
+          "minuti": 90
+        },
+        {
+          "testo": "Scrivere la decisione di chiusura sprint in `piano/decisioni.md` con il campo 'cosa la riaprirebbe'",
+          "minuti": 30
+        },
+        {
+          "testo": "Creare l'evento ricorrente in agenda per il blocco settimanale e la chiusura (regime ordinario da S5)",
+          "minuti": 15
+        },
+        {
+          "testo": "Chiusura settimana",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Cattura in routine",
+        "Triage a fine settimana"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:commits:pipeline",
+        "manuale: tabella ore prima/dopo/costo in decisioni.md"
+      ],
+      "stop": {
+        "testo": "La prima pipeline ha prodotto, su almeno un corso, un output che avresti usato con correzioni minori e in meno tempo?",
+        "altrimenti": "La Fase 2-bis non si apre a S21. Le settimane 21-32 diventano lavoro sul metodo, non sugli agenti."
+      },
+      "note": null
+    },
+    {
+      "settimana": 5,
+      "inizio": "2026-10-05",
+      "fine": "2026-10-11",
+      "fase": "Fase 1 — Media server",
+      "titolo": "Ricerca e acquisto hardware",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Verificare prezzi correnti e ordinare: mini-PC N100 (~200 €), box/DAS per i dischi esistenti (~80 €), disco backup (~100 €), microSD 512 GB (~45 €), lettore ottico USB (80-120 €)",
+          "minuti": 45
+        },
+        {
+          "testo": "Prima di ordinare il lettore: verificare che sia compatibile con i formati che vuoi estrarre (DVD/Blu-ray)",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura in routine + `/triage` a fine settimana",
+        "Un corso passato in più in `fonti/` (obiettivo: 6 a S8)"
+      ],
+      "evidenze": [
+        "manuale: conferme d'ordine (screenshot o riga in log)",
+        "auto:commits:brain",
+        "auto:files:brain/inbox"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 6,
+      "inizio": "2026-10-12",
+      "fine": "2026-10-18",
+      "fase": "Fase 1 — Media server",
+      "titolo": "Preparazione del mini-PC",
+      "minuti": 45,
+      "attivita": [
+        {
+          "testo": "Sistema operativo sul mini-PC, accesso remoto (SSH), Docker",
+          "minuti": 30
+        },
+        {
+          "testo": "Collegare i dischi; creare la struttura `musica/`, `film/`, `backup/`",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura in routine + `/triage` a fine settimana",
+        "Un corso passato in più in `fonti/` (obiettivo: 6 a S8)"
+      ],
+      "evidenze": [
+        "manuale: output di `docker --version` via SSH",
+        "auto:commits:brain",
+        "auto:files:brain/inbox"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 7,
+      "inizio": "2026-10-19",
+      "fine": "2026-10-25",
+      "fase": "Fase 1 — Media server",
+      "titolo": "Backup prima di tutto",
+      "minuti": 45,
+      "attivita": [
+        {
+          "testo": "Configurare il backup automatico dei dischi esistenti sul disco nuovo. Si fa ADESSO, prima di versarci qualsiasi cosa",
+          "minuti": 35
+        },
+        {
+          "testo": "Verificare che il primo backup sia partito e schedulato",
+          "minuti": 10
+        }
+      ],
+      "micro": [
+        "Cattura in routine + `/triage` a fine settimana",
+        "Un corso passato in più in `fonti/` (obiettivo: 6 a S8)"
+      ],
+      "evidenze": [
+        "manuale: log del primo backup completato",
+        "auto:commits:brain",
+        "auto:files:brain/inbox"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 8,
+      "inizio": "2026-10-26",
+      "fine": "2026-11-01",
+      "fase": "Fase 1 — Media server",
+      "titolo": "Navidrome",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Installare Navidrome in Docker, puntarlo su `musica/`",
+          "minuti": 25
+        },
+        {
+          "testo": "Indicizzazione e test di riproduzione da browser",
+          "minuti": 20
+        },
+        {
+          "testo": "Revisione costi abbonamenti: con 4 settimane di consumo reale, il piano aziendale è dimensionato bene? Scrivere la risposta in decisioni.md",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura in routine + `/triage` a fine settimana",
+        "Un corso passato in più in `fonti/` (obiettivo: 6 a S8)"
+      ],
+      "evidenze": [
+        "manuale: screenshot Navidrome con almeno 1 album",
+        "manuale: riga in decisioni.md sugli abbonamenti",
+        "auto:commits:brain",
+        "auto:files:brain/inbox"
+      ],
+      "stop": {
+        "testo": "Catturi 3-4 cose a settimana senza sforzo e il triage gira senza che tu lo eviti?",
+        "altrimenti": "Semplifica: una sola cartella, niente triage automatico. Seconda verifica a S12."
+      },
+      "note": null
+    },
+    {
+      "settimana": 9,
+      "inizio": "2026-11-02",
+      "fine": "2026-11-08",
+      "fase": "Fase 1 — Media server",
+      "titolo": "Sincronizzazione con il FiiO JM21",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Installare Symfonium sul JM21 e collegarlo a Navidrome",
+          "minuti": 15
+        },
+        {
+          "testo": "Primo caricamento massivo: microSD nel lettore di schede sul Mac, NON via cavo USB (il JM21 è USB 2.0)",
+          "minuti": 25
+        },
+        {
+          "testo": "Configurare download selettivo e verificare l'aggiornamento incrementale via Wi-Fi",
+          "minuti": 20
+        }
+      ],
+      "micro": [
+        "Cattura in routine + `/triage`"
+      ],
+      "evidenze": [
+        "manuale: foto del JM21 che riproduce dalla libreria",
+        "auto:commits:brain",
+        "auto:files:brain/inbox"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 10,
+      "inizio": "2026-11-09",
+      "fine": "2026-11-15",
+      "fase": "Fase 1 — Media server",
+      "titolo": "Jellyfin e TV",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Installare Jellyfin in Docker, puntarlo su `film/`",
+          "minuti": 20
+        },
+        {
+          "testo": "Collegarlo alla TV e testare la riproduzione (verificare transcodifica hardware N100)",
+          "minuti": 40
+        }
+      ],
+      "micro": [
+        "Cattura in routine + `/triage`"
+      ],
+      "evidenze": [
+        "manuale: riga in log con esito test TV",
+        "auto:commits:brain",
+        "auto:files:brain/inbox"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 11,
+      "inizio": "2026-11-16",
+      "fine": "2026-11-22",
+      "fase": "Fase 1 — Media server",
+      "titolo": "Flusso di ripping",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Definire il processo per DVD/Blu-ray: software, impostazioni di qualità, convenzione di denominazione. Scriverlo in `brain/ambiti/audio-video/ripping.md`",
+          "minuti": 40
+        },
+        {
+          "testo": "Nota legale: in Italia la copia privata è ammessa, l'aggiramento delle protezioni è area grigia. Informarsi e annotare la posizione scelta",
+          "minuti": 20
+        }
+      ],
+      "micro": [
+        "Cattura in routine + `/triage`"
+      ],
+      "evidenze": [
+        "auto:files:brain/ambiti",
+        "manuale: file ripping.md presente",
+        "auto:commits:brain",
+        "auto:files:brain/inbox"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 12,
+      "inizio": "2026-11-23",
+      "fine": "2026-11-29",
+      "fase": "Fase 1 — Media server",
+      "titolo": "Verifica del flusso e chiusura fase",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Prima verifica del flusso di ripping sui formati che possiedi (1 CD, 1 DVD)",
+          "minuti": 40
+        },
+        {
+          "testo": "Chiusura Fase 1: cosa resta aperto va in decisioni.md. Seconda verifica abitudine di cattura",
+          "minuti": 20
+        }
+      ],
+      "micro": [
+        "Cattura in routine + `/triage`"
+      ],
+      "evidenze": [
+        "manuale: 2 file rippati visibili in Navidrome/Jellyfin",
+        "auto:commits:brain",
+        "auto:files:brain/inbox"
+      ],
+      "stop": {
+        "testo": "Seconda verifica: la cattura regge da 8 settimane?",
+        "altrimenti": "Riduci a una cartella. Il second brain non cresce finché l'abitudine non tiene."
+      },
+      "note": null
+    },
+    {
+      "settimana": 13,
+      "inizio": "2026-11-30",
+      "fine": "2026-12-06",
+      "fase": "F1 — Corso agentic AI",
+      "titolo": "Corso agentic AI, settimana 1 di 8",
+      "minuti": 75,
+      "attivita": [
+        {
+          "testo": "Corso agentic AI (deeplearning.ai), tappa 1 di 8: seguire le lezioni della settimana",
+          "minuti": 60
+        },
+        {
+          "testo": "Una sola nota in `fonti/corso-agentic/` per la settimana: cosa ho imparato, come si applica alla mia catena di produzione",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD a ritmo libero (Fase 1-bis)",
+        "Acquisti CD usati / Bandcamp"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:files:brain/fonti"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 14,
+      "inizio": "2026-12-07",
+      "fine": "2026-12-13",
+      "fase": "F1 — Corso agentic AI",
+      "titolo": "Corso agentic AI, settimana 2 di 8",
+      "minuti": 75,
+      "attivita": [
+        {
+          "testo": "Corso agentic AI (deeplearning.ai), tappa 2 di 8: seguire le lezioni della settimana",
+          "minuti": 60
+        },
+        {
+          "testo": "Una sola nota in `fonti/corso-agentic/` per la settimana: cosa ho imparato, come si applica alla mia catena di produzione",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD a ritmo libero (Fase 1-bis)",
+        "Acquisti CD usati / Bandcamp"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:files:brain/fonti"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 15,
+      "inizio": "2026-12-14",
+      "fine": "2026-12-20",
+      "fase": "F1 — Corso agentic AI",
+      "titolo": "Corso agentic AI, settimana 3 di 8",
+      "minuti": 75,
+      "attivita": [
+        {
+          "testo": "Corso agentic AI (deeplearning.ai), tappa 3 di 8: seguire le lezioni della settimana",
+          "minuti": 60
+        },
+        {
+          "testo": "Una sola nota in `fonti/corso-agentic/` per la settimana: cosa ho imparato, come si applica alla mia catena di produzione",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD a ritmo libero (Fase 1-bis)",
+        "Acquisti CD usati / Bandcamp"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:files:brain/fonti"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 16,
+      "inizio": "2026-12-21",
+      "fine": "2026-12-27",
+      "fase": "F1 — Corso agentic AI",
+      "titolo": "Corso agentic AI, settimana 4 di 8",
+      "minuti": 75,
+      "attivita": [
+        {
+          "testo": "Corso agentic AI (deeplearning.ai), tappa 4 di 8: seguire le lezioni della settimana",
+          "minuti": 60
+        },
+        {
+          "testo": "Una sola nota in `fonti/corso-agentic/` per la settimana: cosa ho imparato, come si applica alla mia catena di produzione",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD a ritmo libero (Fase 1-bis)",
+        "Acquisti CD usati / Bandcamp"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:files:brain/fonti"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 17,
+      "inizio": "2026-12-28",
+      "fine": "2027-01-03",
+      "fase": "F1 — Corso agentic AI",
+      "titolo": "Corso agentic AI, settimana 5 di 8",
+      "minuti": 75,
+      "attivita": [
+        {
+          "testo": "Corso agentic AI (deeplearning.ai), tappa 5 di 8: seguire le lezioni della settimana",
+          "minuti": 60
+        },
+        {
+          "testo": "Una sola nota in `fonti/corso-agentic/` per la settimana: cosa ho imparato, come si applica alla mia catena di produzione",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD a ritmo libero (Fase 1-bis)",
+        "Acquisti CD usati / Bandcamp"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:files:brain/fonti"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 18,
+      "inizio": "2027-01-04",
+      "fine": "2027-01-10",
+      "fase": "F1 — Corso agentic AI",
+      "titolo": "Corso agentic AI, settimana 6 di 8",
+      "minuti": 90,
+      "attivita": [
+        {
+          "testo": "Corso agentic AI (deeplearning.ai), tappa 6 di 8: seguire le lezioni della settimana",
+          "minuti": 60
+        },
+        {
+          "testo": "Una sola nota in `fonti/corso-agentic/` per la settimana: cosa ho imparato, come si applica alla mia catena di produzione",
+          "minuti": 15
+        },
+        {
+          "testo": "Iniziare/completare `metodo/architettura-pipeline-2-3.md`: cosa ha insegnato la prima pipeline, come progettare le due successive",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD a ritmo libero (Fase 1-bis)",
+        "Acquisti CD usati / Bandcamp"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:files:brain/fonti"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 19,
+      "inizio": "2027-01-11",
+      "fine": "2027-01-17",
+      "fase": "F1 — Corso agentic AI",
+      "titolo": "Corso agentic AI, settimana 7 di 8",
+      "minuti": 90,
+      "attivita": [
+        {
+          "testo": "Corso agentic AI (deeplearning.ai), tappa 7 di 8: seguire le lezioni della settimana",
+          "minuti": 60
+        },
+        {
+          "testo": "Una sola nota in `fonti/corso-agentic/` per la settimana: cosa ho imparato, come si applica alla mia catena di produzione",
+          "minuti": 15
+        },
+        {
+          "testo": "Iniziare/completare `metodo/architettura-pipeline-2-3.md`: cosa ha insegnato la prima pipeline, come progettare le due successive",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD a ritmo libero (Fase 1-bis)",
+        "Acquisti CD usati / Bandcamp"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:files:brain/fonti"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 20,
+      "inizio": "2027-01-18",
+      "fine": "2027-01-24",
+      "fase": "F1 — Corso agentic AI",
+      "titolo": "Corso agentic AI, settimana 8 di 8",
+      "minuti": 90,
+      "attivita": [
+        {
+          "testo": "Corso agentic AI (deeplearning.ai), tappa 8 di 8: seguire le lezioni della settimana",
+          "minuti": 60
+        },
+        {
+          "testo": "Una sola nota in `fonti/corso-agentic/` per la settimana: cosa ho imparato, come si applica alla mia catena di produzione",
+          "minuti": 15
+        },
+        {
+          "testo": "Iniziare/completare `metodo/architettura-pipeline-2-3.md`: cosa ha insegnato la prima pipeline, come progettare le due successive",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD a ritmo libero (Fase 1-bis)",
+        "Acquisti CD usati / Bandcamp"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:files:brain/fonti"
+      ],
+      "stop": {
+        "testo": "Esiste il progetto scritto delle pipeline 2 e 3 in metodo/?",
+        "altrimenti": "La Fase 2-bis non parte a S21: la settimana 21 diventa scrittura del progetto."
+      },
+      "note": null
+    },
+    {
+      "settimana": 21,
+      "inizio": "2027-01-25",
+      "fine": "2027-01-31",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana A: Seconda pipeline: specifiche e scaffold",
+      "minuti": 150,
+      "attivita": [
+        {
+          "testo": "Con Claude Code: il passaggio adiacente al primo. Specifiche in `pipeline/spec-02.md`, scaffold del comando",
+          "minuti": 120
+        },
+        {
+          "testo": "Primo test grezzo sui corsi passati",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:pipeline",
+        "auto:commits:brain"
+      ],
+      "stop": null,
+      "note": "Settimana A: un solo blocco da 2,5 h con Claude Code. Se non può essere di 2,5 h, salta il ciclo, non frazionare."
+    },
+    {
+      "settimana": 22,
+      "inizio": "2027-02-01",
+      "fine": "2027-02-07",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana B: Corso MCP + test",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Claude Academy: corso su MCP / connessione a fonti dati (prima metà)",
+          "minuti": 45
+        },
+        {
+          "testo": "Test della pipeline 2 su un corso passato, annotare gli errori",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: nota corso in fonti/"
+      ],
+      "stop": null,
+      "note": "Settimana B: 60 min, niente sviluppo."
+    },
+    {
+      "settimana": 23,
+      "inizio": "2027-02-08",
+      "fine": "2027-02-14",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana A: Seconda pipeline: costruzione",
+      "minuti": 150,
+      "attivita": [
+        {
+          "testo": "Costruzione completa della pipeline 2, test sui corsi passati",
+          "minuti": 120
+        },
+        {
+          "testo": "Correggere `metodo/` dove l'output sbaglia per cause non scritte",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:pipeline",
+        "auto:commits:brain"
+      ],
+      "stop": null,
+      "note": "Settimana A: un solo blocco da 2,5 h con Claude Code. Se non può essere di 2,5 h, salta il ciclo, non frazionare."
+    },
+    {
+      "settimana": 24,
+      "inizio": "2027-02-15",
+      "fine": "2027-02-21",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana B: Corso MCP + test",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Claude Academy: corso MCP (seconda metà)",
+          "minuti": 45
+        },
+        {
+          "testo": "Test pipeline 2, annotare",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: nota corso in fonti/"
+      ],
+      "stop": null,
+      "note": "Settimana B: 60 min, niente sviluppo."
+    },
+    {
+      "settimana": 25,
+      "inizio": "2027-02-22",
+      "fine": "2027-02-28",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana A: Le due pipeline si passano l'output",
+      "minuti": 150,
+      "attivita": [
+        {
+          "testo": "Pipeline 1 → pipeline 2 in sequenza su un corso intero",
+          "minuti": 120
+        },
+        {
+          "testo": "Messa a regime, documentazione in `pipeline/README.md`",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:pipeline",
+        "auto:commits:brain"
+      ],
+      "stop": null,
+      "note": "Settimana A: un solo blocco da 2,5 h con Claude Code. Se non può essere di 2,5 h, salta il ciclo, non frazionare."
+    },
+    {
+      "settimana": 26,
+      "inizio": "2027-03-01",
+      "fine": "2027-03-07",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana B: Misura",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Ore prima/dopo e costo per corso con due pipeline. Tabella in decisioni.md",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: nota corso in fonti/"
+      ],
+      "stop": {
+        "testo": "La seconda pipeline ha risparmiato tempo misurabile?",
+        "altrimenti": "Il ciclo 4 non costruisce la terza: S27-S31 tornano al metodo."
+      },
+      "note": "Settimana B: 60 min, niente sviluppo."
+    },
+    {
+      "settimana": 27,
+      "inizio": "2027-03-08",
+      "fine": "2027-03-14",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana A: Terza pipeline o irrobustimento",
+      "minuti": 150,
+      "attivita": [
+        {
+          "testo": "Decisione in base a S26: terza pipeline (passaggio successivo) oppure irrobustire le due esistenti. Scriverla in decisioni.md e iniziare",
+          "minuti": 150
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:pipeline",
+        "auto:commits:brain"
+      ],
+      "stop": null,
+      "note": "Settimana A: un solo blocco da 2,5 h con Claude Code. Se non può essere di 2,5 h, salta il ciclo, non frazionare."
+    },
+    {
+      "settimana": 28,
+      "inizio": "2027-03-15",
+      "fine": "2027-03-21",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana B: Revisione abbonamenti + corso",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Revisione abbonamenti (mese 7): con i costi per corso di due pipeline, il piano alto è ancora giustificato? Quanto è volume spostabile in locale? Scrivere in decisioni.md",
+          "minuti": 30
+        },
+        {
+          "testo": "Claude Academy: il corso più utile secondo l'esperienza (prima metà)",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: nota corso in fonti/"
+      ],
+      "stop": {
+        "testo": "Il carico giustifica ancora il piano alto?",
+        "altrimenti": "Rivedi l'abbonamento e anticipa la Fase 3 a S29 nelle settimane B."
+      },
+      "note": "Settimana B: 60 min, niente sviluppo."
+    },
+    {
+      "settimana": 29,
+      "inizio": "2027-03-22",
+      "fine": "2027-03-28",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana A: Costruzione",
+      "minuti": 150,
+      "attivita": [
+        {
+          "testo": "Costruzione della terza pipeline o dell'irrobustimento deciso a S27",
+          "minuti": 150
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:pipeline",
+        "auto:commits:brain"
+      ],
+      "stop": null,
+      "note": "Settimana A: un solo blocco da 2,5 h con Claude Code. Se non può essere di 2,5 h, salta il ciclo, non frazionare."
+    },
+    {
+      "settimana": 30,
+      "inizio": "2027-03-29",
+      "fine": "2027-04-04",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana B: Corso + test",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Claude Academy: corso scelto (seconda metà)",
+          "minuti": 45
+        },
+        {
+          "testo": "Test, annotare",
+          "minuti": 15
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: nota corso in fonti/"
+      ],
+      "stop": null,
+      "note": "Settimana B: 60 min, niente sviluppo."
+    },
+    {
+      "settimana": 31,
+      "inizio": "2027-04-05",
+      "fine": "2027-04-11",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana A: Consolidamento e documentazione",
+      "minuti": 150,
+      "attivita": [
+        {
+          "testo": "Consolidamento delle pipeline; documentazione completa in `metodo/`",
+          "minuti": 150
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:pipeline",
+        "auto:commits:brain"
+      ],
+      "stop": null,
+      "note": "Settimana A: un solo blocco da 2,5 h con Claude Code. Se non può essere di 2,5 h, salta il ciclo, non frazionare."
+    },
+    {
+      "settimana": 32,
+      "inizio": "2027-04-12",
+      "fine": "2027-04-18",
+      "fase": "Fase 2-bis — Pipeline 2 e 3",
+      "titolo": "Settimana B: Chiusura fase e caso studio",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Scrivere `metodo/caso-studio-02.md`: la catena a 2-3 passaggi, numeri, cosa venderesti",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: nota corso in fonti/"
+      ],
+      "stop": null,
+      "note": "Settimana B: 60 min, niente sviluppo."
+    },
+    {
+      "settimana": 33,
+      "inizio": "2027-04-19",
+      "fine": "2027-04-25",
+      "fase": "Fase 3 — Modelli locali e routing",
+      "titolo": "Locale sul Mac: installazione",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Ollama o LM Studio sul MacBook 32 GB; scaricare un 7-14B e un ~32B quantizzato",
+          "minuti": 30
+        },
+        {
+          "testo": "Primo test: triage dell'inbox con il modello locale",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage` (ora in locale)",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:commits:pipeline"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 34,
+      "inizio": "2027-04-26",
+      "fine": "2027-05-02",
+      "fase": "Fase 3 — Modelli locali e routing",
+      "titolo": "Locale: migrare il triage",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Riscrivere `/triage` per usare il modello locale; confrontare qualità con il livello alto su 20 file",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage` (ora in locale)",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:commits:pipeline"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 35,
+      "inizio": "2027-05-03",
+      "fine": "2027-05-09",
+      "fase": "Fase 3 — Modelli locali e routing",
+      "titolo": "Locale: riassunti e trascrizioni",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Riassunti dell'inbox e trascrizione dei video salvati in locale (whisper + modello)",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage` (ora in locale)",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:commits:pipeline"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 36,
+      "inizio": "2027-05-10",
+      "fine": "2027-05-16",
+      "fase": "Fase 3 — Modelli locali e routing",
+      "titolo": "Locale: specifica d'acquisto + verifica libreria",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Annotare in `progetti/macchina-domestica.md`: quali modelli usi davvero, quanta memoria, quante volte a settimana. È la specifica della 3-bis",
+          "minuti": 30
+        },
+        {
+          "testo": "Verifica libreria musicale: quanti album in Navidrome? Decisione certificazione (F3): serve a te o alla società? Scrivere in decisioni.md",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage` (ora in locale)",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:commits:pipeline"
+      ],
+      "stop": {
+        "testo": "La libreria musicale supera i 30 album?",
+        "altrimenti": "Il server è finito così com'è. Il budget musica si libera per la decisione di S48."
+      },
+      "note": null
+    },
+    {
+      "settimana": 37,
+      "inizio": "2027-05-17",
+      "fine": "2027-05-23",
+      "fase": "Fase 3 — Modelli locali e routing",
+      "titolo": "Router a consumo: setup",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Configurare OpenRouter (o equivalente). TETTI DI SPESA prima di collegare qualsiasi workflow",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage` (ora in locale)",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:commits:pipeline"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 38,
+      "inizio": "2027-05-24",
+      "fine": "2027-05-30",
+      "fase": "Fase 3 — Modelli locali e routing",
+      "titolo": "Router: collegare il livello intermedio",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Instradare i compiti intermedi delle pipeline sul router; verificare qualità",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage` (ora in locale)",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:commits:pipeline"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 39,
+      "inizio": "2027-05-31",
+      "fine": "2027-06-06",
+      "fase": "Fase 3 — Modelli locali e routing",
+      "titolo": "Router: misura",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Costo reale per corso con i tre livelli. Tabella in decisioni.md",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage` (ora in locale)",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:commits:pipeline"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 40,
+      "inizio": "2027-06-07",
+      "fine": "2027-06-13",
+      "fase": "Fase 3 — Modelli locali e routing",
+      "titolo": "Chiusura Fase 3",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Il volume gira in locale? Il router copre l'intermedio? Scrivere in decisioni.md e preparare la decisione 3-bis",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage` (ora in locale)",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "auto:commits:pipeline"
+      ],
+      "stop": {
+        "testo": "Triage e riassunti girano in locale senza che tu torni al livello alto per insofferenza?",
+        "altrimenti": "Annota se è un problema di modello (→ 3-bis ha senso) o di flusso (→ 3-bis non lo risolve)."
+      },
+      "note": null
+    },
+    {
+      "settimana": 41,
+      "inizio": "2027-06-14",
+      "fine": "2027-06-20",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Decisione di apertura 3-bis",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "PRIMA di guardare listini: scrivere in decisioni.md quale criterio di apertura vale (MacBook insufficiente su dati reali / dati clienti che non possono uscire / occasione dimostrativa già identificata). Se nessuno vale: fase chiusa, budget resta",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": {
+        "testo": "Vale almeno un criterio di apertura della macchina domestica?",
+        "altrimenti": "Fase chiusa. Le settimane 42-47 diventano mantenimento: solo micro-momenti."
+      },
+      "note": null
+    },
+    {
+      "settimana": 42,
+      "inizio": "2027-06-21",
+      "fine": "2027-06-27",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Requisiti macchina domestica",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "(Solo se 3-bis aperta) Requisiti reali dalla Fase 3: modelli, memoria, frequenza. Fascia: 1.500-2.000 € fino a 32B; 2.500-3.500 € per 70B",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 43,
+      "inizio": "2027-06-28",
+      "fine": "2027-07-04",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Requisiti macchina domestica",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "(Solo se 3-bis aperta) Requisiti reali dalla Fase 3: modelli, memoria, frequenza. Fascia: 1.500-2.000 € fino a 32B; 2.500-3.500 € per 70B",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 44,
+      "inizio": "2027-07-05",
+      "fine": "2027-07-11",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Requisiti macchina domestica",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "(Solo se 3-bis aperta) Requisiti reali dalla Fase 3: modelli, memoria, frequenza. Fascia: 1.500-2.000 € fino a 32B; 2.500-3.500 € per 70B",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 45,
+      "inizio": "2027-07-12",
+      "fine": "2027-07-18",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Scelta e acquisto",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "(Solo se 3-bis aperta) Scelta configurazione e acquisto. Ricordare: non è un risparmio, contando l'ammortamento costa più di un'API",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 46,
+      "inizio": "2027-07-19",
+      "fine": "2027-07-25",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Scelta e acquisto",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "(Solo se 3-bis aperta) Scelta configurazione e acquisto. Ricordare: non è un risparmio, contando l'ammortamento costa più di un'API",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 47,
+      "inizio": "2027-07-26",
+      "fine": "2027-08-01",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Scelta e acquisto",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "(Solo se 3-bis aperta) Scelta configurazione e acquisto. Ricordare: non è un risparmio, contando l'ammortamento costa più di un'API",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 48,
+      "inizio": "2027-08-02",
+      "fine": "2027-08-08",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Decisione PC gaming",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "Decisione PC gaming su due dati: quanto hai giocato davvero in 12 mesi, quanto resta del budget personale (riserva 350-650 €; di più solo se la libreria si è fermata a S36). Console, handheld, PC, o niente. Scrivere in decisioni.md",
+          "minuti": 60
+        },
+        {
+          "testo": "(Se 3-bis aperta) Ordine della macchina",
+          "minuti": 30
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": {
+        "testo": "Hai giocato abbastanza e resta budget?",
+        "altrimenti": "Console, handheld, o niente. Non un PC da 1.200 €."
+      },
+      "note": null
+    },
+    {
+      "settimana": 49,
+      "inizio": "2027-08-09",
+      "fine": "2027-08-15",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Messa in opera macchina domestica",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "(Solo se 3-bis aperta) Messa in opera, migrazione dei carichi locali dal MacBook",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 50,
+      "inizio": "2027-08-16",
+      "fine": "2027-08-22",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Messa in opera macchina domestica",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "(Solo se 3-bis aperta) Messa in opera, migrazione dei carichi locali dal MacBook",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 51,
+      "inizio": "2027-08-23",
+      "fine": "2027-08-29",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Messa in opera macchina domestica",
+      "minuti": 60,
+      "attivita": [
+        {
+          "testo": "(Solo se 3-bis aperta) Messa in opera, migrazione dei carichi locali dal MacBook",
+          "minuti": 60
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": null,
+      "note": null
+    },
+    {
+      "settimana": 52,
+      "inizio": "2027-08-30",
+      "fine": "2027-09-05",
+      "fase": "Fase 3-bis / Fase 4",
+      "titolo": "Chiusura anno e piano anno 2",
+      "minuti": 90,
+      "attivita": [
+        {
+          "testo": "Revisione annuale (45 min): rileggere il piano intero, cosa è caduto e perché, premesse ancora valide?",
+          "minuti": 45
+        },
+        {
+          "testo": "Scrivere il piano dell'anno 2 in piano/",
+          "minuti": 45
+        }
+      ],
+      "micro": [
+        "Cattura + `/triage`",
+        "Ripping CD"
+      ],
+      "evidenze": [
+        "auto:commits:brain",
+        "manuale: riga in decisioni.md"
+      ],
+      "stop": null,
+      "note": null
+    }
+  ]
+}
