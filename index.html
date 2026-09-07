@@ -167,7 +167,14 @@
     const plan = past.reduce((a,w)=>a+w.minuti,0);
     const done = past.reduce((a,w)=>a+((stato.chiusure[w.settimana]||{}).minuti||0),0);
     const nonChiuse = past.filter(w=>!stato.chiusure[w.settimana]).length;
-    return {plan, done, nonChiuse};
+    // Ritardo in "settimane equivalenti": per ogni settimana passata, la frazione
+    // del suo blocco che manca (0 se fatta o superata, 1 se non fatta affatto).
+    // Così una settimana di sprint da 390 min vale 1, non 4 settimane ordinarie.
+    const late = Math.round(past.reduce((a,w)=>{
+      const fatti = (stato.chiusure[w.settimana]||{}).minuti||0;
+      return a + Math.max(0, w.minuti - fatti) / w.minuti;
+    },0));
+    return {plan, done, nonChiuse, late};
   }
 
   // ---------- render ----------
@@ -178,12 +185,12 @@
 
     const d = deriva(); let banner = "";
     if (current > 1){
-      const late = Math.max(0, Math.round((d.plan - d.done)/piano.capienza_minuti_settimana.ordinario));
+      const late = d.late;
       banner += `<div class="drift">Finora: <b>${ore(d.done)}</b> fatte su <b>${ore(d.plan)}</b> pianificate` + (d.nonChiuse ? ` · <b>${d.nonChiuse}</b> settimane senza chiusura` : "") + `.</div>`;
       if (late >= 3 || d.nonChiuse >= 3) banner = `<div class="banner">Sei indietro di circa <b>${late}</b> settimane${d.nonChiuse>=3?" e non chiudi da "+d.nonChiuse:""}. Il piano si allunga, non si recupera: sposta tutto avanti.<br><button class="ghost" id="shiftBtn">Sposta il calendario di ${Math.max(late,1)} settimane</button>${banner}</div>`;
     }
     $("#banner").innerHTML = banner;
-    const sb = $("#shiftBtn"); if (sb) sb.onclick = () => applyShift(Math.max(Math.round((d.plan-d.done)/piano.capienza_minuti_settimana.ordinario),1));
+    const sb = $("#shiftBtn"); if (sb) sb.onclick = () => applyShift(Math.max(d.late,1));
 
     const spunte = stato.spunte[w.settimana] || [];
     const tasks = w.attivita.map((t,i)=>`<div class="task ${spunte.includes(i)?"done":""}"><input type="checkbox" id="t${i}" data-i="${i}" ${spunte.includes(i)?"checked":""}><label for="t${i}">${md(t.testo)}</label><span class="m">${t.minuti} min</span></div>`).join("");
